@@ -8,7 +8,8 @@ async function main() {
 
     // Navigate the page to a URL
     console.log("Opening web page...");
-    await page.goto("https://www.indeed.com/");
+
+    await page.goto("https://www.indeed.com");
 
     // Set screen size
     console.log("Changing screen size...");
@@ -17,21 +18,20 @@ async function main() {
       height: 800,
       deviceScaleFactor: 1,
       isMobile: false,
-      slowMo: 250,
+      slowMo: 300,
       userDataDir: "./tmp",
     });
 
     // Type into the search box
+
     console.log("Typing into search box...");
     const searchBoxSelector = "#text-input-what";
-    await page.waitForSelector(searchBoxSelector);
-    await page.type(searchBoxSelector, "Entry level Software engineer");
+    await page.locator(searchBoxSelector).fill("Entry level Software engineer");
 
     // Wait and click on the search button
     const searchResultSelector = ".yosegi-InlineWhatWhere-primaryButton";
     console.log("Clicking search button...");
-    await page.waitForSelector(searchResultSelector);
-    await page.click(searchResultSelector);
+    await page.locator(searchResultSelector).click();
 
     // Wait for the search results to load
     console.log("Waiting for search results...");
