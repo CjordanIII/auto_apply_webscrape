@@ -7,38 +7,45 @@ async function main() {
     const page = await browser.newPage();
 
     // Navigate the page to a URL
-    console.log("Opening web page.....");
+    console.log("Opening web page...");
     await page.goto("https://www.indeed.com/");
 
     // Set screen size
-    console.log("Changing screen size.....");
+    console.log("Changing screen size...");
     await page.setViewport({
       width: 1200,
       height: 800,
       deviceScaleFactor: 1,
       isMobile: false,
+      slowMo: 250,
       userDataDir: "./tmp",
     });
 
-    // Type into search box
-    console.log("typing into search box.....");
-    await page.locator("#text-input-what").fill("example");
+    // Type into the search box
+    console.log("Typing into search box...");
+    const searchBoxSelector = "#text-input-what";
+    await page.waitForSelector(searchBoxSelector);
+    await page.type(searchBoxSelector, "Entry level Software engineer");
 
-    // Wait and click on first result
-    // const searchResultSelector = ".devsite-result-item-link";
-    // await page.waitForSelector(searchResultSelector);
-    // await page.click(searchResultSelector);
+    // Wait and click on the search button
+    const searchResultSelector = ".yosegi-InlineWhatWhere-primaryButton";
+    console.log("Clicking search button...");
+    await page.waitForSelector(searchResultSelector);
+    await page.click(searchResultSelector);
 
-    // Locate the full title with a unique string
-    const textSelector = await page.waitForSelector(
-      "text/Customize and automate"
-    );
-    const fullTitle = await textSelector?.evaluate((el) => el.textContent);
+    // Wait for the search results to load
+    console.log("Waiting for search results...");
+    await page.waitForNavigation();
 
-    // Print the full title
-    console.log('The title of this blog post is "%s".', fullTitle);
+    // Click on experience level button
+    const experienceButton = "#filter-explvl";
+    console.log("Clicking experience level button...");
+    await page.waitForSelector(experienceButton);
+    await page.click(experienceButton);
 
-    //   await browser.close();
+    // Wait for the experience level filter options to load
+
+    // await browser.close();
   } catch (error) {
     console.log(error);
   }
