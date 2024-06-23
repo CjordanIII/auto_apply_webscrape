@@ -7,7 +7,7 @@ const { executablePath } = require("puppeteer");
 const links = data.filter((d) => {
   return d.includes("Entry");
 });
-console.log(links);
+// console.log(links);
 async function main() {
   puppeteerExtra.use(pluginStealth());
   try {
@@ -56,7 +56,7 @@ async function main() {
     delay(4000000);
     delay(4000000);
     // type into search bar criteria
-    await page.locator(searchBoxSelector).fill("Entry level Software engineer");
+    await page.locator(searchBoxSelector).fill("Help desk");
     delay(4000000);
     delay(4000000);
     delay(4000000);
@@ -112,4 +112,4 @@ function delay(time) {
   });
 }
 
-// main();
+main();
