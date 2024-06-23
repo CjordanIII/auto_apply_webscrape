@@ -40,9 +40,28 @@ async function main() {
       visible: true,
       timeout: 10000,
     });
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
     // type into search bar criteria
     await page.locator(searchBoxSelector).fill("Entry level Software engineer");
-
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
     // Wait for selector
     const searchResultSelector = ".yosegi-InlineWhatWhere-primaryButton";
     console.log("Clicking search button...");
@@ -60,30 +79,25 @@ async function main() {
 
     // waiting
     delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    delay(4000000);
+    // const jobDiv = "#mosaic-provider-jobcards";
 
-    // Click on experience level button
+    // await page.waitForSelector(jobDiv, {
+    //   visible: true,
+    // });
 
-    const experienceButton = "#filter-explvl";
-    console.log("Clicking experience level button...");
-    await page.waitForSelector(experienceButton, {
-      visible: true,
-      timeout: 10000,
+    const numOfJobs = await page.$$eval("li > a", (job) => {
+      return job.map((j) => j.href);
     });
-    delay(4000000);
-    delay(4000000);
-    delay(4000000);
-    delay(4000000);
-    delay(4000000);
-    delay(4000000);
-    delay(4000000);
-    delay(4000000);
-    delay(4000000);
-    delay(4000000);
-    await page.click(experienceButton);
-    console.log("click");
-    // Wait for the experience level filter options to load
-    //TODO use evaluate to click on button posible solution change class or click
-    // @ use this class="yosegi-FilterPill-pillList css-zhqt0z eu4oa1w0" parent container
+    console.log(numOfJobs, "jobs");
     // await browser.close();
   } catch (error) {
     console.log(error);
