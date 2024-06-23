@@ -1,8 +1,13 @@
 const puppeteer = require("puppeteer");
 const puppeteerExtra = require("puppeteer-extra");
 const pluginStealth = require("puppeteer-extra-plugin-stealth");
-
+const data = require("./data");
 const { executablePath } = require("puppeteer");
+
+const links = data.filter((d) => {
+  return d.includes("Entry");
+});
+console.log(links);
 async function main() {
   puppeteerExtra.use(pluginStealth());
   try {
@@ -88,12 +93,8 @@ async function main() {
     delay(4000000);
     delay(4000000);
     delay(4000000);
-    // const jobDiv = "#mosaic-provider-jobcards";
 
-    // await page.waitForSelector(jobDiv, {
-    //   visible: true,
-    // });
-
+    // gets job links
     const numOfJobs = await page.$$eval("li > a", (job) => {
       return job.map((j) => j.href);
     });
@@ -111,4 +112,4 @@ function delay(time) {
   });
 }
 
-main();
+// main();
